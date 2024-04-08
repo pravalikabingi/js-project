@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        fieldset{
+        width: 60px;
+        height: 250px;
+        border-radius: 5%;
+        box-shadow: 0px 0px 5px 5px rgb(241, 157, 169);
+    }
+    .container{
+        display: flex;
+        justify-content: center;
+        margin-top: 10%;
+    }
+    body{
+        background-image: url("https://wallpapercave.com/wp/wp7488412.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    
+    }
+
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <fieldset>
+            <center><button>Login</button></center>
+            
+            <form action="">
+                <label for="username" id="user1">Username:</label><br><br>
+                <input type="text" placeholder="Username" class="label" id="user" style="width: 200px;"><br><br>
+                <label for="Password" id="puser1">Password:</label><br><br>
+                <input type="password" placeholder="Password" class="label" id="pass" style="width: 200px;"><br><br>
+                <button id="login">Login</button>
+    
+    
+            </form>
+        </fieldset>
+
+
+    </div>
+    <script>
+        let userget=document.getElementById("user")
+        let passget=document.getElementById("pass")
+        let form=document.forms;
+        console.log(form[0]);
+        form[0].addEventListener("submit",(e)=>{
+            e.preventDefault();
+            let valueget=JSON.parse(localStorage.getItem("get"));
+            console.log(valueget);
+            let uservalid=userget.value;
+            let passvalid=passget.value;
+            console.log(uservalid);
+
+            let userval=valueget.find((val)=>{
+                return val["username"]==uservalid
+                console.log(userval);
+            })
+            let passval=valueget.find((val)=>{
+                return val["password"]==passvalid
+                console.log(passval);
+            })
+            if(userval && passval){
+                window.location.assign("./index.html")
+            }else{
+                alert("credentials are invalid")
+            }
+        });
+
+    </script>
+</body>
+</html>
+

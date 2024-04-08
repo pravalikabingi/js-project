@@ -1,0 +1,104 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         fieldset{
+        width: 60px;
+        height: 250px;
+        border-radius: 5%;
+        box-shadow: 0px 0px 5px 5px rgb(241, 157, 169);
+    }
+    .container{
+        display: flex;
+        justify-content: center;
+        margin-top: 10%;
+    }
+    body{
+        background-image: url("https://wallpapercave.com/wp/wp7488230.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    
+    }
+    label{
+       font-size: large;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <fieldset>
+        <center><button>Registration</button></center>
+        
+        <form action="">
+            <label for="username" id="user1">Username:</label><br><br>
+            <input type="text" placeholder="Username" class="label" id="input" style="width: 200px"><br>
+            <label for="Password" id="puser1">Password:</label><br><br>
+            <input type="password" placeholder="Password" class="label" id="input" style="width: 200px"><br>
+            <label for="Confirm Password" id="puser1">Confirm Password:</label><br><br>
+            <input type="password" placeholder="Confirm Password:" class="label" id="input" style="width: 200px"><br><br>
+            <input type="submit" id="submit" value="register">
+            <input type="button" value="login" id="log">
+
+
+        </form>
+    </fieldset>
+    </div>
+     <script>
+        let divget=document.getElementsByTagName("div")
+        // let divcon=divget[1]
+        let form=document.forms;
+        console.log(form[0]);
+        form[0].addEventListener("submit",(e)=>{
+            e.preventDefault();
+            console.log(e);
+            let username=e.target[0].value;
+            if(username[0]!==username[0].toUpperCase() && username.length<10){
+                alert("write in correct format");
+                return
+            }
+            console.log(username);
+
+            let password=e.target[1].value;
+            let passtype=/[a_z]/.test(password)&&/[a-z]/.test(password)&&/\d/.test(password);
+            if(passtype && password.length<8){
+                alert("password is not in correct format")
+                return
+            }
+            console.log(password);
+
+            let confirmpassword=e.target[2].value;
+            if(password!==confirmpassword){
+                alert("password and confirmpassword are not same ")
+                return
+            }
+            console.log(confirmpassword);
+
+            let user={username, password};
+            let reg=JSON.parse(localStorage.getItem("get"))||[]
+            console.log(reg);
+            let duplicate=reg.find((val)=>val.username==username);
+            console.log(duplicate);
+            if(duplicate){
+                alert("user alredy exit")
+            }else{
+                reg.push(user);
+                localStorage.setItem("get",JSON.stringify(reg))
+                alert("user registered successfully")
+                form.reset()
+            }
+        });
+        let login=document.getElementById("log")
+        login.addEventListener("click",()=>{
+            window.location.assign("./login.html")
+        })
+        </script>
+        
+        
+</body>
+</html>
